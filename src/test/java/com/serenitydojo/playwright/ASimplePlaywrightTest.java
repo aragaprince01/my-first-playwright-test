@@ -74,7 +74,7 @@ public class ASimplePlaywrightTest {
         @Override
         public Options getOptions() {
             return new Options()
-                    .setHeadless(false)
+                    .setHeadless(true)
                     .setLaunchOptions(
                             new BrowserType.LaunchOptions()
                                   .setArgs(Arrays.asList("--no-sandbox",
