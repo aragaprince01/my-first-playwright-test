@@ -66,15 +66,10 @@ public class ASimplePlaywrightTest {
     @Test
     void filterGridByCountry(Page page) throws InterruptedException {
         // Go to site
-        // page.navigate("https://viewpoint.glasslewis.com/WD/?siteId=DemoClient");
         GlassLewisDemo glassLewisDemoPage = new GlassLewisDemo(page);
         glassLewisDemoPage.OpenPage();
 
         // Filter grid by country = Belgium
-        //  page.locator("[id='filter-country'] input[data-bind*='visible:displaySearchBox']").fill("Belgium");
-        //  page.locator("[id='filter-country'] .fieldset-county .checkbox label").first().click();
-        //  page.locator("[id='filter-country'] .fieldset-county .checkbox label").first().click();
-        //  page.locator("[id='filter-country'] #btn-update").click();
         glassLewisDemoPage.FilterGridByCountry("Belgium");
 
 
@@ -83,7 +78,6 @@ public class ASimplePlaywrightTest {
         Assertions.assertTrue(matchingSearchResults > 0 );
 
         // Get the data in the last column and see if all of them are from Belgium
-        // page.locator("[id='grid'] [class*='content'] tbody tr").first().click();
         glassLewisDemoPage.TriggerOutOfFocus();
         List<String> countryResults = page.locator("[id='grid'] [class*='content'] tbody tr td:nth-child(5)").allTextContents();
         for (String country : countryResults) {
@@ -94,13 +88,10 @@ public class ASimplePlaywrightTest {
     @Test
     void searchByCompany(Page page){
         // Go to site
-        // page.navigate("https://viewpoint.glasslewis.com/WD/?siteId=DemoClient");
         GlassLewisDemo glassLewisDemoPage = new GlassLewisDemo(page);
         glassLewisDemoPage.OpenPage();
 
         // Fill in the search box with "Activision Blizzard Inc"
-        // page.locator("[id=header-search] input[class='k-input']").fill("Activision Blizzard Inc");
-        // page.getByText("Activision Blizzard Inc - United States").click();
         glassLewisDemoPage.SearchAndGoToCompanyDetails("Activision Blizzard Inc", "United States");
 
         // Assert that the page is in the correct page by its Header text
