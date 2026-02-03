@@ -39,7 +39,30 @@ class GlassLewisDemo {
         page.locator("[id=header-search] input[class='k-input']").fill(companyName);
         page.getByText(companyName + " - " + country).click();
     }
+}
 
+class CompanyPage {
+    private final Page page;
+
+    CompanyPage(Page page) {
+        this.page = page;
+    }
+
+    boolean IsHeaderDisplayed(String headerName) {
+        // Assert that the page is in the correct page by its Header text
+        // PlaywrightAssertions.assertThat(page.locator("[id='detail-issuer-name']")).containsText(headerName);
+        int numberOfElements = page.locator("[id='detail-issuer-name']").count();
+
+        return numberOfElements > 0;
+    }
+
+    boolean IsGridDisplayed() {
+        // Assert that the grid is displayed
+        // PlaywrightAssertions.assertThat(page.locator("#detail-meetings-table-container"));
+        int numberOfElements = page.locator("#detail-meetings-table-container").count();
+
+        return numberOfElements > 0;
+    }
 }
 
 @UsePlaywright(ASimplePlaywrightTest.MyOptions.class)
@@ -94,10 +117,14 @@ public class ASimplePlaywrightTest {
         // Fill in the search box with "Activision Blizzard Inc"
         glassLewisDemoPage.SearchAndGoToCompanyDetails("Activision Blizzard Inc", "United States");
 
+        CompanyPage companyDetails = new CompanyPage(page);
+
         // Assert that the page is in the correct page by its Header text
-        PlaywrightAssertions.assertThat(page.locator("[id='detail-issuer-name']")).containsText("Activision Blizzard Inc");
+        // PlaywrightAssertions.assertThat(page.locator("[id='detail-issuer-name']")).containsText("Activision Blizzard Inc");
+        Assertions.assertTrue(companyDetails.IsHeaderDisplayed("Activision Blizzard Inc"));
 
         // Assert that the grid is displayed
-        PlaywrightAssertions.assertThat(page.locator("#detail-meetings-table-container"));
+        // PlaywrightAssertions.assertThat(page.locator("#detail-meetings-table-container"));
+        Assertions.assertTrue(companyDetails.IsGridDisplayed());
     }
 }
