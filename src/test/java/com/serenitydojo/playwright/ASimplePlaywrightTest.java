@@ -120,7 +120,6 @@ public class ASimplePlaywrightTest {
         CompanyPage companyDetails = new CompanyPage(page);
 
         // Assert that the page is in the correct page by its Header text
-        // PlaywrightAssertions.assertThat(page.locator("[id='detail-issuer-name']")).containsText("Activision Blizzard Inc");
         Assertions.assertTrue(companyDetails.IsHeaderDisplayed("Activision Blizzard Inc"));
 
         // Assert that the grid is displayed
